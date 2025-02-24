@@ -5,7 +5,7 @@ import { addToCart } from "../redux/cartSlice";
 import Header from "./Header";
 
 const ProductList = () => {
-    const [products, setProducts] = useState([]);
+    const [products, setProducts] = useState([]); //By using state it changes the states
     const [searchTerm, setSearchTerm] = useState("");
     const dispatch = useDispatch();
 
