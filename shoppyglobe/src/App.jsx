@@ -1,7 +1,8 @@
 import React, { Suspense, lazy } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import ProductList from "./components/ProductList";
 
-const ProductList = lazy(() => import("./components/ProductList"));
+//const ProductList = lazy(() => import("./components/ProductList"));
 const ProductDetail = lazy(() => import("./components/ProductDetails"));
 const Cart = lazy(() => import("./components/Cart"));
 const NotFound = lazy(() => import("./components/NotFound"));
