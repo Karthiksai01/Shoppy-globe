@@ -1,15 +1,33 @@
 import express from "express";
 import mongoose from "mongoose";
-import { routes } from "./routes/products.routes.js";
-const app=new express();
-app.listen(2500,()=>{
-    console.log("server is running on port 2500")
+import dotenv from "dotenv";
+import { routes } from "./routes/products.routes.js"; // ✅ Named Import
+
+dotenv.config(); // Load environment variables
+
+const app = express();
+const PORT = process.env.PORT || 2500;
+
+// Middleware
+app.use(express.json());
+
+// MongoDB Connection
+mongoose.connect(process.env.MONGO_URI, { 
+    useNewUrlParser: true, 
+    useUnifiedTopology: true 
+})
+.then(() => console.log("Database connected successfully"))
+.catch((err) => console.log("MongoDB Connection Error:", err));
+
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
-mongoose.connect(
-    "mongodb+srv://ksshoppyglobe:karthiksai12@cluster0.hs81j.mongodb.net/"
-);
-const db=mongoose.connection;
-db.on("open",()=>{
-    console.log("Database connected successfully")
+// Error Handling Middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ message: "Something went wrong!" });
 });
+
+
+// Routes
 routes(app);
