@@ -2,13 +2,13 @@ import productModel from "../model/products.model.js";
 
 // ✅ Create Product
 export function createProduct(req, res) {
-    const { title, images, description, rating } = req.body;
+    const { name, price, description, stock } = req.body;
 
-    if (!title || !images || !description || !rating) {
+    if (!name || !price || !description || !stock) {
         return res.status(400).json({ message: "All fields are required!" });
     }
 
-    const newProduct = new productModel({ title, images, description, rating });
+    const newProduct = new productModel({ name, price, description, stock });
 
     newProduct.save()
         .then(data => res.status(201).json(data))
