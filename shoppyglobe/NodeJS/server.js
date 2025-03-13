@@ -1,7 +1,9 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import {routes} from "./routes/products.routes.js"; // ✅ Default Import
+import {routes} from "./routes/products.routes.js";
+import cartRoutes from "./routes/cart.routes.js";
+import authRoutes from "./routes/auth.routes.js";
 
 dotenv.config(); // Load environment variables
 
@@ -18,6 +20,9 @@ mongoose.connect(process.env.MONGO_URI)
 
 // ✅ Routes
 routes(app);
+app.use("/api/cart", cartRoutes);
+//Resisters for user
+app.use("/api/auth", authRoutes);
 
 // ✅ Error Handling Middleware
 app.use((err, req, res, next) => {
