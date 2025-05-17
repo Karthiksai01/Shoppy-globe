@@ -7,7 +7,6 @@ const ProductDetail = () => {
     const { id } = useParams();
     const [product, setProduct] = useState(null);
     const dispatch = useDispatch();
-//fetching data from the dummy urls with error handlings
     useEffect(() => {
         const fetchProduct = async () => {
             try {
@@ -23,7 +22,7 @@ const ProductDetail = () => {
 
     if (!product) return <p>Loading product details...</p>;
 
-// Product details when we click on view more the below data should be visible related to the product
+
     return (
         <div className="product-detail">
             <img src={product.images} alt={product.title} />
